@@ -18,9 +18,7 @@
         },
         methods: {
             onChange () {
-                const country = this.countries.find((item) => {
-                    item.ID === this.selected
-                });
+                const country = this.countries.find((item)=>item.ID===this.selected);
                 this.$emit('get-country',country);
             }
         }

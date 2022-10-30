@@ -2,12 +2,12 @@
   <main v-if="!loading">
     <DataTitle :text="title" :dataDate="dataDate"></DataTitle>
     <DataBoxes :stats="stats"></DataBoxes>
-    <!-- <CountrySelect @get-country="getCountryData" :countries="countries"></CountrySelect> -->
-    <!-- <button 
-      @click="clearCountryData"
+    <CountrySelect @get-country="getCountryData" :countries="countries"></CountrySelect>
+    <button 
+      @click="clearCountryData()"
       class="bg-green-700 text-white rounded p-3 mt-10 focus:outline-none hover:bg-green-600">
       Clear Country
-    </button> -->
+    </button>
   </main>
   <main class="flex flex-col align-center justify-center text-center" v-else>
     <div class="text-gray-500 text-3xl mt-10 mt-10 mb-6">
@@ -39,7 +39,7 @@ export default defineComponent({
       'dataDate':'',
       'stats':{},
       'countries': [],
-      loadingImage: require('../assets/hour_glass.gif'),
+      'loadingImage': require('../assets/hour_glass.gif'),
       'covid_data': {},
 
     }
@@ -58,7 +58,14 @@ export default defineComponent({
               
             });
     },
+    getCountryData(country: any){
+      this.stats = country;
+      this.title = country.Country;      
+    },
     clearCountryData(){
+      this.loading=true;
+      this.getCovidData();
+      this.title = 'Global';
     }
   },
   mounted () {
